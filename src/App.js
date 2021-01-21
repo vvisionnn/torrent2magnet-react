@@ -12,6 +12,7 @@ import {
   ListItemText,
   ListItemIcon,
   ListItemSecondaryAction,
+  Button,
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
@@ -52,6 +53,11 @@ function App() {
     setChecked(newChecked);
   };
 
+  const clearAll = () => {
+    setMagnetList([]);
+    setChecked([]);
+  };
+
   const handleFileChosen = async (event) => {
     const files = event.target.files;
 
@@ -88,12 +94,18 @@ function App() {
         </AppBar>
         <main>
           <Toolbar variant={"dense"} />
-          <input
-            type="file"
-            accept=".torrent"
-            onChange={handleFileChosen}
-            multiple
-          />
+          {magnetList.length <= 0 ? (
+            <input
+              type="file"
+              accept=".torrent"
+              onChange={handleFileChosen}
+              multiple
+            />
+          ) : (
+            <Button variant={"contained"} color={"primary"} onClick={clearAll}>
+              CLEAR ALL
+            </Button>
+          )}
           {magnetList.length > 0 && (
             <List>
               {magnetList.map((item, index) => {
@@ -104,6 +116,7 @@ function App() {
                     dense
                     button
                     onClick={handleToggle(item)}
+                    disableRipple
                   >
                     <ListItemIcon>
                       <Checkbox
