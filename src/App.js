@@ -58,6 +58,10 @@ function App() {
     setChecked([]);
   };
 
+  const copyAll = () => {
+    console.log(magnetList);
+  };
+
   const handleFileChosen = async (event) => {
     const files = event.target.files;
 
@@ -102,9 +106,22 @@ function App() {
               multiple
             />
           ) : (
-            <Button variant={"contained"} color={"primary"} onClick={clearAll}>
-              CLEAR ALL
-            </Button>
+            <Toolbar>
+              <Button
+                variant={"contained"}
+                color={"primary"}
+                onClick={clearAll}
+              >
+                CLEAR ALL
+              </Button>
+              <Button
+                variant={"contained"}
+                color={"secondary"}
+                onClick={copyAll}
+              >
+                COPY ALL
+              </Button>
+            </Toolbar>
           )}
           {magnetList.length > 0 && (
             <List>
