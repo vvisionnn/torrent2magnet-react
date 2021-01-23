@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
-import CommentIcon from "@material-ui/icons/Comment";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 const parseTorrent = require("parse-torrent");
 
 const customTheme = createMuiTheme({});
@@ -146,7 +146,7 @@ function App() {
                     <ListItemText>{item}</ListItemText>
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="comments">
-                        <CommentIcon />
+                        <FileCopyIcon />
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
