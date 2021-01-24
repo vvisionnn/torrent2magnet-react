@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
   appbarTitle: {
     flexGrow: 1,
   },
+  toolbarAction: {
+    marginRight: theme.spacing(1),
+  },
+  list: {
+    margin: theme.spacing(2),
+  },
 }));
 
 function App() {
@@ -92,7 +98,7 @@ function App() {
         <AppBar className={classes.appbar} elevation={0}>
           <Toolbar variant={"dense"}>
             <Typography variant="h6" className={classes.appbarTitle}>
-              Title
+              Torrent to Magnet Link
             </Typography>
           </Toolbar>
         </AppBar>
@@ -106,8 +112,9 @@ function App() {
               multiple
             />
           ) : (
-            <Toolbar>
+            <Toolbar variant={"dense"}>
               <Button
+                className={classes.toolbarAction}
                 variant={"contained"}
                 color={"primary"}
                 onClick={clearAll}
@@ -115,6 +122,7 @@ function App() {
                 CLEAR ALL
               </Button>
               <Button
+                className={classes.toolbarAction}
                 variant={"contained"}
                 color={"secondary"}
                 onClick={copyAll}
@@ -124,7 +132,7 @@ function App() {
             </Toolbar>
           )}
           {magnetList.length > 0 && (
-            <List>
+            <List className={classes.list}>
               {magnetList.map((item, index) => {
                 return (
                   <ListItem
