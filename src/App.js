@@ -17,8 +17,10 @@ import {
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-const parseTorrent = require("parse-torrent");
 
+import DND from "./components/DragAndDrop/DragAndDrop";
+
+const parseTorrent = require("parse-torrent");
 const customTheme = createMuiTheme({});
 
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +35,27 @@ const useStyles = makeStyles((theme) => ({
   appbarTitle: {
     flexGrow: 1,
   },
+  toolbar: {
+    margin: 0,
+    padding: 0,
+  },
+  pageContent: {
+    flexGrow: 1,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      height: "calc(100vh - 56px)",
+    },
+    [theme.breakpoints.up("md")]: {
+      height: "calc(100vh - 64px)",
+    },
+  },
   toolbarAction: {
     marginRight: theme.spacing(1),
+    // backgroundColor: "red",
   },
   list: {
-    margin: theme.spacing(2),
+    // margin: theme.spacing(2),
   },
 }));
 
@@ -68,9 +86,7 @@ function App() {
     console.log(magnetList);
   };
 
-  const handleFileChosen = async (event) => {
-    const files = event.target.files;
-
+  const fileOnDrop = async (files) => {
     const readFileAsync = (file) =>
       new Promise((resolve) => {
         const reader = new FileReader();
@@ -104,64 +120,61 @@ function App() {
         </AppBar>
         <main>
           <Toolbar variant={"dense"} />
-          {magnetList.length <= 0 ? (
-            <input
-              type="file"
-              accept=".torrent"
-              onChange={handleFileChosen}
-              multiple
-            />
-          ) : (
-            <Toolbar variant={"dense"}>
-              <Button
-                className={classes.toolbarAction}
-                variant={"contained"}
-                color={"primary"}
-                onClick={clearAll}
-              >
-                CLEAR ALL
-              </Button>
-              <Button
-                className={classes.toolbarAction}
-                variant={"contained"}
-                color={"secondary"}
-                onClick={copyAll}
-              >
-                COPY ALL
-              </Button>
-            </Toolbar>
-          )}
-          {magnetList.length > 0 && (
-            <List className={classes.list}>
-              {magnetList.map((item, index) => {
-                return (
-                  <ListItem
-                    key={index}
-                    role={undefined}
-                    dense
-                    button
-                    onClick={handleToggle(item)}
-                    disableRipple
+          <div className={classes.pageContent}>
+            {magnetList.length <= 0 ? (
+              <DND onDrop={fileOnDrop} acceptType={["torrent"]} />
+            ) : (
+              <div>
+                <Toolbar variant={"dense"} className={classes.toolbar}>
+                  <Button
+                    className={classes.toolbarAction}
+                    variant={"contained"}
+                    color={"primary"}
+                    onClick={clearAll}
                   >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(item) !== -1}
-                        tabIndex={-1}
+                    CLEAR ALL
+                  </Button>
+                  <Button
+                    className={classes.toolbarAction}
+                    variant={"contained"}
+                    color={"secondary"}
+                    onClick={copyAll}
+                  >
+                    COPY ALL
+                  </Button>
+                </Toolbar>
+                <List className={classes.list}>
+                  {magnetList.map((item, index) => {
+                    return (
+                      <ListItem
+                        key={index}
+                        role={undefined}
+                        dense
+                        button
+                        onClick={handleToggle(item)}
                         disableRipple
-                      />
-                    </ListItemIcon>
-                    <ListItemText>{item}</ListItemText>
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="comments">
-                        <FileCopyIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-              })}
-            </List>
-          )}
+                      >
+                        <ListItemIcon>
+                          <Checkbox
+                            edge="start"
+                            checked={checked.indexOf(item) !== -1}
+                            tabIndex={-1}
+                            disableRipple
+                          />
+                        </ListItemIcon>
+                        <ListItemText>{item}</ListItemText>
+                        <ListItemSecondaryAction>
+                          <IconButton edge="end" aria-label="comments">
+                            <FileCopyIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </div>
+            )}
+          </div>
         </main>
       </ThemeProvider>
     </div>
