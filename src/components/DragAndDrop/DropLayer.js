@@ -18,7 +18,6 @@ const useStyle = makeStyles((theme) => ({
   },
   textStyle: {
     width: "100%",
-    fontSize: "20px",
     opacity: "0.75",
   },
   iconStyle: {
@@ -55,7 +54,9 @@ export default function DropLayer(props) {
     }
     return (
       <span>
-        <span>Drag and drop or </span>
+        <Typography component={"span"} variant={"h6"}>
+          Drag and drop or{" "}
+        </Typography>
         <label htmlFor={"fileChoose"}>
           <input
             type="file"
@@ -75,9 +76,13 @@ export default function DropLayer(props) {
               display: "none",
             }}
           />
-          <span style={{ color: "#4b87ff", cursor: "pointer" }}>
+          <Typography
+            component={"span"}
+            variant={"h6"}
+            style={{ color: "#4b87ff", cursor: "pointer" }}
+          >
             Click To Upload
-          </span>
+          </Typography>
         </label>
       </span>
     );

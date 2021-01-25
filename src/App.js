@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appbarTitle: {
-    flexGrow: 1,
+    // flexGrow: 1,
   },
   toolbar: {
     paddingLeft: theme.spacing(1),
