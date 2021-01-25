@@ -107,6 +107,10 @@ function App() {
     setMagnetList(tempList);
   };
 
+  const copyItem = async (text) => {
+    await navigator.clipboard.writeText(text);
+  };
+
   return (
     <div className={classes.root}>
       <ThemeProvider theme={customTheme}>
@@ -129,7 +133,7 @@ function App() {
                   <Button
                     className={classes.toolbarAction}
                     variant={"contained"}
-                    color={"primary"}
+                    color={"secondary"}
                     onClick={clearAll}
                   >
                     CLEAR ALL
@@ -137,10 +141,18 @@ function App() {
                   <Button
                     className={classes.toolbarAction}
                     variant={"contained"}
-                    color={"secondary"}
+                    color={"primary"}
                     onClick={copyAll}
                   >
                     COPY ALL
+                  </Button>
+                  <Button
+                    className={classes.toolbarAction}
+                    variant={"contained"}
+                    color={"primary"}
+                    onClick={copyAll}
+                  >
+                    COPY SELECTED
                   </Button>
                 </Toolbar>
 
@@ -168,7 +180,7 @@ function App() {
                         </ListItemText>
                         <ListItemSecondaryAction
                           onClick={() => {
-                            console.log(item);
+                            copyItem(item);
                           }}
                         >
                           <IconButton edge="end" aria-label="comments">
