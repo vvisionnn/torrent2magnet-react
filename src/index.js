@@ -4,7 +4,9 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-module.hot.accept();
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  module.hot.accept();
+}
 
 ReactDOM.render(
   <React.StrictMode>
