@@ -21,7 +21,6 @@ export default function DND(props) {
         let containUnsupportedFile = false;
         files.forEach((file) => {
           const type = String(file.name.split(".").pop()).toLowerCase();
-          console.log(acceptType.indexOf(type), acceptType, type);
           if (acceptType.indexOf(type) === -1) {
             containUnsupportedFile = true;
           }

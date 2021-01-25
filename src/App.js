@@ -36,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   toolbar: {
-    margin: 0,
-    padding: 0,
+    paddingLeft: theme.spacing(1),
   },
   pageContent: {
     flexGrow: 1,
@@ -54,8 +53,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     // backgroundColor: "red",
   },
-  list: {
-    // margin: theme.spacing(2),
+  list: {},
+  listItem: {
+    borderRadius: "4px",
   },
 }));
 
@@ -143,12 +143,13 @@ function App() {
                     COPY ALL
                   </Button>
                 </Toolbar>
+
                 <List className={classes.list}>
                   {magnetList.map((item, index) => {
                     return (
                       <ListItem
+                        className={classes.listItem}
                         key={index}
-                        role={undefined}
                         dense
                         button
                         onClick={handleToggle(item)}
@@ -162,8 +163,14 @@ function App() {
                             disableRipple
                           />
                         </ListItemIcon>
-                        <ListItemText>{item}</ListItemText>
-                        <ListItemSecondaryAction>
+                        <ListItemText>
+                          <Typography noWrap>{item}</Typography>
+                        </ListItemText>
+                        <ListItemSecondaryAction
+                          onClick={() => {
+                            console.log(item);
+                          }}
+                        >
                           <IconButton edge="end" aria-label="comments">
                             <FileCopyIcon />
                           </IconButton>
