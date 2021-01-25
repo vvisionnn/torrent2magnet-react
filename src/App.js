@@ -73,9 +73,9 @@ function App() {
 
     const readFileAsync = (file) =>
       new Promise((resolve) => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = function () {
-          var arrayBuffer = reader.result;
+          const arrayBuffer = reader.result;
           const bf = Buffer.from(arrayBuffer);
           const torrentFile = parseTorrent(bf);
           const magnetLink = `magnet:?xt=urn:btih:${torrentFile.infoHash}&dn=${torrentFile.name}`;
