@@ -84,6 +84,7 @@ function App() {
 
   const copyAll = () => {
     console.log(magnetList);
+    copyItem(magnetList.join("\n"));
   };
 
   const fileOnDrop = async (files) => {
