@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const [magnetList, setMagnetList] = React.useState([]);
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -83,8 +83,11 @@ function App() {
   };
 
   const copyAll = () => {
-    console.log(magnetList);
     copyItem(magnetList.join("\n"));
+  };
+
+  const copySelected = () => {
+    copyItem(checked.join("\n"));
   };
 
   const fileOnDrop = async (files) => {
@@ -151,7 +154,7 @@ function App() {
                     className={classes.toolbarAction}
                     variant={"contained"}
                     color={"primary"}
-                    onClick={copyAll}
+                    onClick={copySelected}
                   >
                     COPY SELECTED
                   </Button>
