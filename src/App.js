@@ -42,12 +42,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    [theme.breakpoints.down("md")]: {
-      height: "calc(100vh - 56px)",
-    },
-    [theme.breakpoints.up("md")]: {
-      height: "calc(100vh - 64px)",
-    },
   },
   toolbarAction: {
     marginRight: theme.spacing(1),
@@ -119,18 +113,24 @@ function App() {
     <div className={classes.root}>
       <ThemeProvider theme={customTheme}>
         <CssBaseline />
-        <AppBar className={classes.appbar} elevation={0}>
-          <Toolbar variant={"dense"}>
-            <Typography variant="h6" className={classes.appbarTitle}>
-              Torrent to Magnet Link
-            </Typography>
-          </Toolbar>
-        </AppBar>
         <main>
-          <Toolbar variant={"dense"} />
-          <div className={classes.pageContent}>
+          <div
+            className={classes.pageContent}
+            style={{
+              height: "100vh",
+            }}
+          >
             {magnetList.length <= 0 ? (
-              <DND onDrop={fileOnDrop} acceptType={["torrent"]} />
+              <div
+                style={{
+                  maxWidth: "800px",
+                  height: "100%",
+                  margin: "auto",
+                  padding: "20px 0px 20px 0px",
+                }}
+              >
+                <DND onDrop={fileOnDrop} acceptType={["torrent"]} />
+              </div>
             ) : (
               <div>
                 <Toolbar variant={"dense"} className={classes.toolbar}>
